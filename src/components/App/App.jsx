@@ -73,7 +73,7 @@ export const App = () => {
     getImages(value, page, controller);
 
     return () => {
-      controller.abort(reason);
+      controller.abort();
     };
   }, [page, value]);
 
