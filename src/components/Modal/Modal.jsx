@@ -1,39 +1,36 @@
 import { ModalWrapper, ModalContent } from './Modal.styled';
-import { Component } from 'react';
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export class Modal extends Component {
-  componentDidMount() {
-    window.addEventListener('keydown', this.handlerKeyDown);
+export const Modal = ({ children, toogleModal }) => {
+  useEffect(() => {
+    window.addEventListener('keydown', handlerKeyDown);
     document.body.style.overflow = 'hidden';
-  }
 
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handlerKeyDown);
-    document.body.style.overflow = '';
-  }
+    return () => {
+      window.removeEventListener('keydown', handlerKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, []);
 
-  handlerKeyDown = evt => {
-    if (evt.code === 'Escape') {
-      this.props.toogleModal();
-    }
-  };
-  handlerBackdropClick = evt => {
-    if (evt.currentTarget === evt.target) {
-      this.props.toogleModal();
+  const handlerKeyDown = event => {
+    if (event.code === 'Escape') {
+      toogleModal();
     }
   };
 
-  render() {
-    console.log(this.props);
-    const { children } = this.props;
-    return createPortal(
-      <ModalWrapper onClick={this.handlerBackdropClick}>
-        <ModalContent>{children}</ModalContent>
-      </ModalWrapper>,
-      modalRoot
-    );
-  }
-}
+  const handlerBackdropClick = event => {
+    if (event.currentTarget === event.target) {
+      toogleModal();
+    }
+  };
+
+  return createPortal(
+    <ModalWrapper onClick={handlerBackdropClick}>
+      <ModalContent>{children}</ModalContent>
+    </ModalWrapper>,
+    modalRoot
+  );
+};

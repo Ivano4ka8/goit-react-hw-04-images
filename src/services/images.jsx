@@ -3,8 +3,9 @@ import axios from 'axios';
 const API_KEY = '36684005-bee5d5c8682e5aa73080486ab';
 const BASE_URL = 'https://pixabay.com/api/';
 
-export const getImages = async (value, page) => {
+export const getImages = async (value, page, signal) => {
   const { data } = await axios.get(`${BASE_URL}`, {
+    signal: `${signal}`,
     params: {
       key: `${API_KEY}`,
       q: `${value}`,
