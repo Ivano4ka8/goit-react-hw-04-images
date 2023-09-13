@@ -16,10 +16,11 @@ import 'react-toastify/dist/ReactToastify.css';
 // );
 // window.scrollTo(0, height);
 
+const PER_PAGE = 12;
+
 export const App = () => {
   const [value, setValue] = useState('');
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(12);
   const [images, setImages] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [isEmpty, setEmpty] = useState(false);
@@ -54,7 +55,7 @@ export const App = () => {
         }
 
         setImages([...images, ...hits]);
-        setVisible(page < Math.ceil(totalHits / perPage));
+        setVisible(page < Math.ceil(totalHits / PER_PAGE));
       } catch (error) {
         console.log({ error });
         if (error.code !== 'ERR_CANCELED') {
