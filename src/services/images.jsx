@@ -5,10 +5,10 @@ const BASE_URL = 'https://pixabay.com/api/';
 
 export const getImages = async (value, page, signal) => {
   const { data } = await axios.get(`${BASE_URL}`, {
-    signal: `${signal}`,
+    signal: signal,
     params: {
-      key: `${API_KEY}`,
-      q: `${value}`,
+      key: API_KEY,
+      q: value,
       image_type: 'photo',
       orientation: 'horizontal',
       page,
