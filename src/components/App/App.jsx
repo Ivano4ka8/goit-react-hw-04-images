@@ -74,7 +74,7 @@ export const App = () => {
     return () => {
       controller.abort();
     };
-  }, [page, value]);
+  }, [page, value]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = value => {
     if (!value) {

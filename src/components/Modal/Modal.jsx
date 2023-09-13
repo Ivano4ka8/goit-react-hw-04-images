@@ -13,7 +13,7 @@ export const Modal = ({ children, toogleModal }) => {
       window.removeEventListener('keydown', handlerKeyDown);
       document.body.style.overflow = '';
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handlerKeyDown = event => {
     if (event.code === 'Escape') {
