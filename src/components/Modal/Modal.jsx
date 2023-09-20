@@ -6,6 +6,11 @@ const modalRoot = document.querySelector('#modal-root');
 
 export const Modal = ({ children, toogleModal }) => {
   useEffect(() => {
+    const handlerKeyDown = event => {
+      if (event.code === 'Escape') {
+        toogleModal();
+      }
+    };
     window.addEventListener('keydown', handlerKeyDown);
     document.body.style.overflow = 'hidden';
 
@@ -13,13 +18,7 @@ export const Modal = ({ children, toogleModal }) => {
       window.removeEventListener('keydown', handlerKeyDown);
       document.body.style.overflow = '';
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const handlerKeyDown = event => {
-    if (event.code === 'Escape') {
-      toogleModal();
-    }
-  };
+  }, [toogleModal]);
 
   const handlerBackdropClick = event => {
     if (event.currentTarget === event.target) {
